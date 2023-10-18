@@ -45,9 +45,14 @@ public class ShopGUI extends SimpleGui{
 
         this.setSlot(53, new GuiElementBuilder()
                 .setItem(Items.BARRIER)
-                .setName(Text.literal("Exit").setStyle(Style.EMPTY.withItalic(true)))
-                .setCallback(((index, clickType, action) -> this.close())));
+                .setName(Text.literal("Back").setStyle(Style.EMPTY.withItalic(true)))
+                .setCallback(((index, clickType, action) -> {
+                    this.close();
+                    ShopListGUI shopListGUI = new ShopListGUI(player);
+                    shopListGUI.open();
+                })));
 
+        // Populate with items
         for(int i = 0; i < Math.min(shop.getItems().size(), 36); i++){
             ShopItem item = shop.getItems().get(i);
             ItemStack guiItem = new ItemStack(Registries.ITEM.get(new Identifier(item.getItemMaterial())));

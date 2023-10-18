@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Shop {
     private String name;
+    private String itemMaterial;
     private List<ShopItem> items;
 
     public String getName() {
@@ -15,13 +16,18 @@ public class Shop {
         return items;
     }
 
-    public Shop(String name) {
-        this(name, new LinkedList<>());
+    public String getItemMaterial() {
+        return itemMaterial;
     }
 
-    public Shop(String name, List<ShopItem> items) {
+    public Shop(String name) {
+        this(name, new LinkedList<>(), "minecraft:diamond");
+    }
+
+    public Shop(String name, List<ShopItem> items, String ItemMaterial) {
         this.name = name;
         this.items = items;
+        this.itemMaterial = ItemMaterial;
     }
 
     @Override

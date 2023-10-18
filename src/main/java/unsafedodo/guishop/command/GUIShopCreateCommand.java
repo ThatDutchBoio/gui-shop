@@ -11,6 +11,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import unsafedodo.guishop.GUIShop;
 import unsafedodo.guishop.shop.Shop;
+import java.util.LinkedList;
 
 public class GUIShopCreateCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess, CommandManager.RegistrationEnvironment registrationEnvironment){
@@ -18,11 +19,12 @@ public class GUIShopCreateCommand {
                 .then(CommandManager.literal("create")
                     .requires(Permissions.require("guishop.create", 3))
                         .then(CommandManager.argument("shopName", StringArgumentType.string())
-                            .executes(GUIShopCreateCommand::run))));
+                            .then(CommandManager.argument("shopIcon", StringArgumentType.string()))
+                                .executes(GUIShopCreateCommand::run))));
     }
 
     public static int run(CommandContext<ServerCommandSource> context){
-        GUIShop.shops.addLast(new Shop(StringArgumentType.getString(context, "shopName")));
+        GUIShop.shops.addLast(new Shop(StringArgumentType.getString(context, "shopName"), new LinkedList<>(),  StringArgumentType.getString(context, "shopIcon")));
         context.getSource().sendFeedback(()-> Text.literal("Shop successfully created!").formatted(Formatting.GREEN), false);
         return 0;
     }

@@ -1,4 +1,4 @@
-# GUI Shop (Original by UnsafeDodo; Tweaked to be more intuitive)
+# GUI Shop
 
 A fabric server-side mod to create and manage GUI shops.
 They can be later opened by using commands, allowing integration with NPC mods like [Taterzens](https://www.curseforge.com/minecraft/mc-mods/taterzens).

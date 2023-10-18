@@ -26,7 +26,7 @@ public class ShopSerializer implements JsonSerializer<Shop>, JsonDeserializer<Sh
             shopItems.addLast(item);
         }
 
-        return new Shop(shopName, shopItems);
+        return new Shop(shopName, shopItems, "minecraft:diamond");
     }
 
     @Override

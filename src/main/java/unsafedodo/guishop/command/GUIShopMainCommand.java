@@ -10,11 +10,16 @@ import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import unsafedodo.guishop.gui.PagedShopGUI;
+import unsafedodo.guishop.gui.ShopGUI;
+
+import unsafedodo.guishop.gui.ShopListGUI;
+import unsafedodo.guishop.shop.Shop;
+import unsafedodo.guishop.util.CommonMethods;
 
 public class GUIShopMainCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess, CommandManager.RegistrationEnvironment registrationEnvironment){
         dispatcher.register(CommandManager.literal("guishop")
-                .requires(Permissions.require("guishop.main", 3))
                 .then(CommandManager.literal("help")
                         .requires(Permissions.require("guishop.help", 3))
                         .executes(GUIShopMainCommand::runHelp))
@@ -39,9 +44,8 @@ public class GUIShopMainCommand {
     }
 
     public static int run(CommandContext<ServerCommandSource> context){
-        String git = "https://github.com/UnsafeDodo/gui-shop";
-        context.getSource().sendFeedback(()-> Text.literal("GUIShop by UnsafeDodo is running!\nCheck the GitHub repository for usage:").formatted(Formatting.GREEN), false);
-        context.getSource().sendFeedback(()->Text.literal(git).setStyle(Style.EMPTY.withUnderline(true)).styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, git))).formatted(Formatting.BLUE), false);
+        ShopListGUI shopListGUI = new ShopListGUI(context.getSource().getPlayer());
+        shopListGUI.open();
         return 0;
     }
 }
